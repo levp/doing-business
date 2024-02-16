@@ -1,0 +1,12 @@
+{
+	"name": "doing-business",
+  "type": "module",
+  "private": true,
+  "engines": {
+		"node": "^20.11.1",
+		"npm": "^10.4.0"
+	},
+	"workspaces": [
+		"./modules/*"
+	]
+}
