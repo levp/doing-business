@@ -1,4 +1,4 @@
-import { computed, signal, SignalView } from "../core/signal";
+import { computed, signal, SignalView } from "./signal";
 
 export class Business {
   #money = signal(0);

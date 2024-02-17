@@ -1,4 +1,4 @@
-import { signal } from "..";
+import { signal } from "./signal";
 
 export interface CreateClipboardParams {
   timeout?: number;
@@ -9,11 +9,11 @@ export function createClipboard({
 }: CreateClipboardParams = {}) {
   const copied = signal(false);
   const error = signal<Error | null>(null);
-  const copyTimeout = signal<number | null>(null);
+  const _copyTimeout = signal<number | null>(null);
 
   const handleCopyResult = (value: boolean) => {
-    window.clearTimeout(copyTimeout.value!);
-    copyTimeout.value = window.setTimeout(
+    window.clearTimeout(_copyTimeout.value!);
+    _copyTimeout.value = window.setTimeout(
       () => (copied.value = false),
       timeout
     );
@@ -36,8 +36,9 @@ export function createClipboard({
   const reset = () => {
     copied.value = false;
     error.value = null;
-    window.clearTimeout(copyTimeout.value!);
+    window.clearTimeout(_copyTimeout.value!);
   };
 
-  return { copy, reset, error, copied, copyTimeout };
+  // copyTimeout is only exposed to hook into any framework's lifecycle
+  return { copy, reset, error, copied, _copyTimeout };
 }

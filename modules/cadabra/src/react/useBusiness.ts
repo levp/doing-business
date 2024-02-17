@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
-import { useSignal } from "../../core/react/useSignal";
-import { Business } from "../business";
+import { useSignal } from "./useSignal";
+import { Business } from "../core";
 
 export function useBusiness() {
   // let's keep this scoped

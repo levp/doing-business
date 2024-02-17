@@ -18,7 +18,7 @@ export default defineConfig({
   // Configuration for building the library.
   build: {
     lib: {
-      entry: ["src/index.ts"],
+      entry: ["src/core/index.ts", "src/react/index.ts", "src/vue/index.ts"],
       name: "cadabra",
       fileName: "index",
       formats: ["es", "cjs"],

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SignalView } from "../signal";
+import { SignalView } from "../core";
 
 export function useSignal<T>(sig: SignalView<T>) {
   const [value, setValue] = useState<T>(sig.value);

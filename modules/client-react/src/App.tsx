@@ -1,4 +1,4 @@
-import { useBusiness, useClipboard } from "@doing-business/cadabra/src";
+import { useBusiness, useClipboard } from "@doing-business/cadabra/src/react";
 
 export function App() {
   const {
@@ -11,7 +11,7 @@ export function App() {
     earnIncome,
     levelUpIncome,
   } = useBusiness();
-  const { copy } = useClipboard();
+  const { copy, copied } = useClipboard();
 
   return (
     <div>
