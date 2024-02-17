@@ -1,10 +1,9 @@
 {
-  "name": "@doing-business/core",
+  "name": "@doing-business/cadabra",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "build": "vite build"
   },
   "devDependencies": {
     "typescript": "^5.3.3"

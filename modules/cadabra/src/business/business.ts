@@ -1,15 +1,15 @@
-import {computed, signal, SignalView} from './signal';
+import { computed, signal, SignalView } from "../core/signal";
 
 export class Business {
   #money = signal(0);
   #income = signal(5);
   #incomeLevel = signal(1);
   #incomeNextLevelIncrease = computed([this.#incomeLevel], (incomeLevel) => {
-    console.log('nani incomeNextLevelIncrease');
+    console.log("nani incomeNextLevelIncrease");
     return 1 + incomeLevel * 2;
   });
   #incomeUpgradeCost = computed([this.#incomeLevel], (incomeLevel) => {
-    console.log('nani incomeUpgradeCost');
+    console.log("nani incomeUpgradeCost");
     return 50 + incomeLevel * 25;
   });
 

@@ -21,12 +21,12 @@ type TupleToGenericParams<T extends any[]> = {
 
 export function computed<T, TDependencies extends Signal<any>[]>(
   dependencies: TDependencies,
-  compute: (...deps: TupleToGenericParams<TDependencies>) => T,
+  compute: (...deps: TupleToGenericParams<TDependencies>) => T
 ): SignalView<T> {
   const listeners = new Set<SignalListener<T>>();
   let value: T;
   const listener = () => {
-    const newValue = compute(...dependencies.map(s => s.value) as any);
+    const newValue = compute(...(dependencies.map((s) => s.value) as any));
     if (newValue === value) {
       return;
     }
