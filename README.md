@@ -13,10 +13,10 @@ cd moduels/react-client
 npm run dev
 ```
 
-## Build the core library (not needed for the demo)
+## Build the cadabra library (not needed for the demo)
 
 ```sh
-cd modules/core
+cd modules/cadabra
 npm run build
 ```
 
