@@ -22,6 +22,8 @@ export function App() {
           <button
             onClick={() => {
               earnIncome();
+              // IMPORTANT NOTE: Needs a rerender to consider the earnIncome call(effect)...
+              // I mean any react lifecycle method works like this, but this one isn't idempotent, should rethink it...
               copy(money);
               console.log("copied money to clipboard, try pasting it!");
             }}
