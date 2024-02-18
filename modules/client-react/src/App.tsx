@@ -1,35 +1,52 @@
-import {useBusiness} from './providers/Business.provider.tsx';
-import {useSignal} from './core/signal.hook.tsx';
+import { useBusiness, useClipboard } from "@doing-business/cadabra/src/react";
 
 export function App() {
-  const business = useBusiness();
+  const {
+    money,
+    income,
+    incomeLevel,
+    incomeNextLevelIncrease,
+    incomeUpgradeCost,
 
-  const money = useSignal(business.money);
-  const income = useSignal(business.income);
-  const incomeLevel = useSignal(business.incomeLevel);
-  const incomeNextLevelIncrease = useSignal(business.incomeNextLevelIncrease);
-  const incomeUpgradeCost = useSignal(business.incomeUpgradeCost);
+    earnIncome,
+    levelUpIncome,
+  } = useBusiness();
+  const { copy, copied } = useClipboard();
 
-  return <div>
+  return (
     <div>
-      <div>CURRENT MONEY: {money}</div>
       <div>
-        Income: {income} (level {incomeLevel})<br />
-        <button onClick={() => business.earnIncome()}>
-          Earn income!
-        </button>
-      </div>
-      <div>
-        Level up your income!<br />
-        Increase it by {incomeNextLevelIncrease}<br />
-        Price: {incomeUpgradeCost}<br />
-        <button
-          onClick={() => business.levelUpIncome()}
-          disabled={money < incomeUpgradeCost}
-        >
-          Level up income!
-        </button>
+        <div>CURRENT MONEY: {money}</div>
+        <div>
+          Income: {income} (level {incomeLevel})<br />
+          <button
+            onClick={() => {
+              earnIncome();
+              // IMPORTANT NOTE: Needs a rerender to consider the earnIncome call(effect)...
+              // I mean any react lifecycle method works like this, but this one isn't idempotent and has side effect, should rethink it...
+              // or we ignore this and let earnIncome return the new money value, but that might "contradict" with react's mental model of "state"...
+              copy(money);
+              console.log("copied money to clipboard, try pasting it!");
+            }}
+          >
+            Earn income!
+          </button>
+        </div>
+        <div>
+          Level up your income!
+          <br />
+          Increase it by {incomeNextLevelIncrease}
+          <br />
+          Price: {incomeUpgradeCost}
+          <br />
+          <button
+            onClick={() => levelUpIncome()}
+            disabled={money < incomeUpgradeCost}
+          >
+            Level up income!
+          </button>
+        </div>
       </div>
     </div>
-  </div>;
+  );
 }
